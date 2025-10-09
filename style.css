@@ -1,0 +1,171 @@
+a {
+  text-decoration: none;
+}
+
+body {
+  background: #c9e78a;
+  max-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 56.25px;
+  padding: 10px 28px;
+  border: white;
+  color: #077233;
+  font-size: 18px;
+  margin-top: -1.13px;
+  font-family: "Clash Display", sans-serif;
+  font-weight: 500;
+  margin-top: 18px;
+}
+
+.box {
+  position: relative;
+  z-index: 1;
+}
+
+.box .can {
+  display: block;
+  margin: 0 auto;
+  width: 316px;
+  height: 580px;
+  margin-top: -490px;
+  padding-bottom: 5px;
+}
+
+.box .shadowcan {
+  position: fixed;
+  width: 826px;
+  height: 53px;
+  top: 665px;
+  left: 534px;
+}
+
+.box .shadowc {
+  position: fixed;
+  width: 374px;
+  height: 53px;
+  top: 550px;
+  left: 900px;
+}
+
+.box .ShadowL {
+  position: fixed;
+  width: 297px;
+  height: 53px;
+  top: 580px;
+  left: 270px;
+}
+
+.header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 264px;
+  position: relative;
+}
+
+.header .text-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Clash Display", sans-serif;
+  font-weight: 700;
+  color: #298f52;
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.header .navbar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.header .div {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "General Sans", sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 17px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.header .frame {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.image .img {
+  position: fixed;
+  width: 340px;
+  height: 498px;
+  top: 0;
+  left: 0;
+  margin-top: 230px;
+}
+
+.image .pear2 {
+  position: fixed;
+  width: 232px;
+  height: 355px;
+  top: 300px;
+  right: 0;
+}
+
+.image .pear3 {
+  position: fixed;
+  width: 225px;
+  height: 168px;
+  top: 70px;
+  left: 870px;
+}
+
+.image .pear4 {
+  position: fixed;
+  width: 276px;
+  height: 300px;
+  top: 70px;
+  left: 270px;
+}
+
+.labels {
+  position: relative;
+  width: 1402px;
+  height: 553px;
+  overflow: hidden;
+}
+
+.labels .frame {
+  left: 0;
+  position: absolute;
+  width: 1402px;
+  height: 553px;
+  top: 0;
+}
+
+.labels .text-wrapper {
+  text-align: center;
+  top: -1px;
+  left: 168px;
+  font-family: "Clash Display", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 449.8px;
+  letter-spacing: 0;
+  line-height: normal;
+}
