@@ -3,59 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruity</title>
 
-    <link rel="stylesheet" href="./src/style.css" />
-
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,700,500,600&f[]=general-sans@500,600,400&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>Fruity | Pear</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background-color: #cfeeaf;
+        transition: background-color 1.5s ease-in-out;
+      }
+      #page-container {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
-    <a href="./apple.html" id="pageLink">
-      <div class="pear" id="page1">
-        <div class="header">
-          <div class="text-wrapper">Fruity</div>
-          <div class="navbar">
-            <div class="div">Shop</div>
-            <div class="div">About</div>
-            <div class="div">Careers</div>
-            <div class="div">Partnership</div>
-            <div class="div">Contact</div>
-          </div>
-          <div class="frame">
-            <div class="div">My Cart</div>
-            <div class="div">|</div>
-            <div class="div">Register</div>
-          </div>
-        </div>
+    <div id="page-container" role="main"></div>
 
-        <div class="labels">
-          <div class="frame"><div class="text-wrapper">Pear</div></div>
-        </div>
+    <script>
+      const pages = [
+        { html: "./index.html", css: "./src/style.css", color: "#cfeeaf" },
+        { html: "./apple.html", css: "./src/apple.css", color: "#f9c0cb" },
+        { html: "./exotic.html", css: "./src/exotic.css", color: "#c9b6ff" },
+      ];
 
-        <div class="image">
-          <img class="pear3 pear-image" src="./images/image 3.png" alt="Pear 3" />
-        </div>
-        <div class="box"><img class="shadowc" src="./images/ShadowC.png" alt="Shadow C" /></div>
-        <div class="image">
-          <img class="pear2 pear-image" src="./images/image 2.png" alt="Pear 2" />
-        </div>
-        <div class="box"><img class="ShadowL" src="./images/ShadowL.png" alt="Shadow L" /></div>
-        <div class="image">
-          <img class="pear4 pear-image" src="./images/image 4.png" alt="Pear 4" />
-        </div>
-        <div class="box"><img class="can" src="./images/Can.png" alt="Can" /></div>
-        <div class="box">
-          <img class="shadowcan" src="./images/ShadowCan.png" alt="Shadow Can" />
-        </div>
-        <div class="image">
-          <img class="img pear-image" src="./images/image 1.png" alt="Pear 1" />
-        </div>
-        <button class="button">Shop Taste</button>
-      </div>
-    </a>
+      const container = document.getElementById("page-container");
+      let currentIndex = 0;
+      let currentStyleTag = null;
+
+      function loadCSS(file) {
+        if (currentStyleTag) currentStyleTag.remove();
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = file;
+        document.head.appendChild(link);
+        currentStyleTag = link;
+      }
+
+      async function loadPage() {
+        const page = pages[currentIndex];
+
+        try {
+          const res = await fetch(page.html);
+          const html = await res.text();
+
+          const temp = document.createElement("div");
+          temp.innerHTML = html;
+          const bodyContent = temp.querySelector("body")?.innerHTML || html;
+
+          container.innerHTML = bodyContent;
+          document.body.style.backgroundColor = page.color;
+          loadCSS(page.css);
+
+          currentIndex = (currentIndex + 1) % pages.length;
+        } catch (error) {
+          console.error("Error loading page:", page.html, error);
+        }
+      }
+
+      loadPage();
+      setInterval(loadPage, 1500);
+    </script>
   </body>
 </html>
