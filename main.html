@@ -12,7 +12,8 @@
         padding: 0;
         height: 100%;
         overflow: hidden;
-        background-color: #cfeeaf;
+        background-color: #cfeeaf; 
+        transition: background-color 1.5s ease-in-out; 
       }
       #page-container {
         width: 100%;
@@ -22,13 +23,13 @@
     </style>
   </head>
   <body>
-    <div id="page-container"></div>
+    <div id="page-container" role="main"></div>
 
     <script>
       const pages = [
-        { html: "index.html", css: "src/style.css", color: "#cfeeaf" },
-        { html: "apple.html", css: "src/apple.css", color: "#f9c0cb" },
-        { html: "exotic.html", css: "src/exotic.css", color: "#c9b6ff" },
+        { html: "./index.html", css: "./src/style.css", color: "#cfeeaf" },  
+        { html: "./apple.html", css: "./src/apple.css", color: "#f9c0cb" },  
+        { html: "./exotic.html", css: "./src/exotic.css", color: "#c9b6ff" } 
       ];
 
       const container = document.getElementById("page-container");
@@ -47,22 +48,26 @@
       async function loadPage() {
         const page = pages[currentIndex];
 
-        const res = await fetch(page.html);
-        const html = await res.text();
+        try {
+          const res = await fetch(page.html);
+          const html = await res.text();
 
-        const temp = document.createElement("div");
-        temp.innerHTML = html;
-        const bodyContent = temp.querySelector("body")?.innerHTML || html;
+          const temp = document.createElement("div");
+          temp.innerHTML = html;
+          const bodyContent = temp.querySelector("body")?.innerHTML || html;
 
-        container.innerHTML = bodyContent;
-        document.body.style.backgroundColor = page.color;
-        loadCSS(page.css);
+          container.innerHTML = bodyContent;
+          document.body.style.backgroundColor = page.color;
+          loadCSS(page.css);
 
-        currentIndex = (currentIndex + 1) % pages.length;
+          currentIndex = (currentIndex + 1) % pages.length;
+        } catch (error) {
+          console.error("Error loading page:", page.html, error);
+        }
       }
 
       loadPage();
-      setInterval(loadPage, 1500);
+      setInterval(loadPage, 1500); 
     </script>
   </body>
 </html>
