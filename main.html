@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruity</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background-color: #cfeeaf;
+      }
+      #page-container {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page-container"></div>
+
+    <script>
+      const pages = [
+        { html: "index.html", css: "src/style.css", color: "#cfeeaf" },
+        { html: "apple.html", css: "src/apple.css", color: "#f9c0cb" },
+        { html: "exotic.html", css: "src/exotic.css", color: "#c9b6ff" },
+      ];
+
+      const container = document.getElementById("page-container");
+      let currentIndex = 0;
+      let currentStyleTag = null;
+
+      function loadCSS(file) {
+        if (currentStyleTag) currentStyleTag.remove();
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = file;
+        document.head.appendChild(link);
+        currentStyleTag = link;
+      }
+
+      async function loadPage() {
+        const page = pages[currentIndex];
+
+        const res = await fetch(page.html);
+        const html = await res.text();
+
+        const temp = document.createElement("div");
+        temp.innerHTML = html;
+        const bodyContent = temp.querySelector("body")?.innerHTML || html;
+
+        container.innerHTML = bodyContent;
+        document.body.style.backgroundColor = page.color;
+        loadCSS(page.css);
+
+        currentIndex = (currentIndex + 1) % pages.length;
+      }
+
+      loadPage();
+      setInterval(loadPage, 1500);
+    </script>
+  </body>
+</html>
